@@ -35,6 +35,7 @@
 
   let state = readState();
   let route = [];
+  let disposePlayer;
 
   function save(message) {
     try {
@@ -131,8 +132,7 @@
       <div class="page-heading lesson-heading"><p class="eyebrow">${course.name} · GETPLUS practice</p><h1>${lesson.title}</h1><p>${lesson.summary}</p></div>
       <div class="lesson-layout">
         <div>
-          <video class="player" controls playsinline preload="metadata" poster="./assets/${course.art}" aria-label="${lesson.title}">
-            <source src="./assets/video/${lesson.video}" type="video/mp4">
+          <video class="player" controls playsinline preload="metadata" poster="./assets/${course.art}" aria-label="${lesson.title}" data-clip="./assets/video/${lesson.video}">
             <track kind="captions" src="./assets/video/${lesson.video.replace(".mp4", ".vtt")}" srclang="en" label="English">
             <a href="./assets/video/${lesson.video}">Open MP4 lesson</a>
           </video>
@@ -187,6 +187,34 @@
     return '<div class="wrap inside"><div class="page-heading"><h1>Page unavailable</h1><p>Open the course library to find a subject or lesson.</p><a class="button primary" href="#courses">Open courses</a></div></div>';
   }
 
+  function preparePlayer(video) {
+    const errorMessage = document.querySelector("#video-error");
+    const clip = video.dataset.clip;
+    const controller = new AbortController();
+    let clipUrl;
+    video.addEventListener("error", () => { errorMessage.hidden = false; });
+    if (location.protocol === "file:") {
+      video.src = clip;
+    } else {
+      // The bundled clips are small. A blob keeps them seekable on static hosts
+      // that serve the entire file in response to a byte-range request.
+      fetch(clip, { signal: controller.signal }).then(response => {
+        if (!response.ok) throw new Error("Lesson video unavailable");
+        return response.blob();
+      }).then(media => {
+        if (controller.signal.aborted) return;
+        clipUrl = URL.createObjectURL(media);
+        video.src = clipUrl;
+      }).catch(() => {
+        if (!controller.signal.aborted) video.src = clip;
+      });
+    }
+    return () => {
+      controller.abort();
+      if (clipUrl) URL.revokeObjectURL(clipUrl);
+    };
+  }
+
   function render({ focus = false } = {}) {
     if (location.hash === "#main") return;
     route = (location.hash.slice(1) || "home").split("/");
@@ -206,10 +234,10 @@
     if (section === "books" && route.length === 1) html = books();
     if (section === "books" && course && route.length === 2) html = book(course);
     if (section === "planner" && route.length === 1) html = planner();
+    disposePlayer?.();
     main.innerHTML = html;
-    main.querySelector("video")?.addEventListener("error", () => {
-      document.querySelector("#video-error").hidden = false;
-    }, { capture: true });
+    const video = main.querySelector("video");
+    disposePlayer = video ? preparePlayer(video) : undefined;
     document.title = section === "home" ? "GETPLUS — HSC Study Workspace" : `${main.querySelector("h1")?.textContent.trim() || "GETPLUS"} — GETPLUS`;
     document.querySelectorAll("[data-nav]").forEach(link => {
       if (link.dataset.nav === section) link.setAttribute("aria-current", "page");
