@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.000
+Choose a primary key
+
+00:00:04.000 --> 00:00:08.000
+List the columns that could identify a row.
+
+00:00:08.000 --> 00:00:12.220
+Reject any column whose value can repeat or be missing.
+
+00:00:12.220 --> 00:00:17.710
+Prefer a stable identifier. Reference it from related tables using a foreign key.
+
+00:00:17.710 --> 00:00:25.730
+Two students can share a name. A school-issued student ID can uniquely identify each row in the student table.

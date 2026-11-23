@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1017">
+  <meta name="description" content="GETPLUS is an independent HSC study workspace for Bangla, ICT and English.">
+  <title>GETPLUS — HSC Study Workspace</title>
+  <link rel="icon" href="./assets/mark.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f%5B%5D=general-sans%40400%2C500%2C600%2C700&amp;display=swap">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f%5B%5D=clash-display%40500%2C600&amp;display=swap">
+  <link rel="stylesheet" href="./assets/site.css">
+  <script defer src="./assets/catalog.js"></script>
+  <script defer src="./assets/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="intro" id="intro" aria-hidden="true" hidden><div class="intro-frame"><div class="intro-mark"><i></i><i></i></div><div class="intro-word">GETPLUS</div><span></span></div></div>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#home" aria-label="GETPLUS home"><span class="brand-mark" aria-hidden="true"></span>GETPLUS</a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#home" data-nav="home">Home</a>
+        <a href="#courses" data-nav="courses">Courses</a>
+        <a href="#books" data-nav="books">Books</a>
+        <a href="#planner" data-nav="planner">Planner</a>
+      </nav>
+      <button class="search-open" type="button" id="open-search"><span class="search-icon" aria-hidden="true"></span><span class="search-text">Search</span><kbd>Ctrl K</kbd></button>
+    </div>
+  </header>
+  <main id="main" tabindex="-1"></main>
+  <footer class="footer"><div class="wrap footer-inner"><a class="brand" href="#home"><span class="brand-mark" aria-hidden="true"></span>GETPLUS</a><p>Independent HSC study workspace.</p><a href="#courses">Course library</a></div></footer>
+  <dialog id="search-dialog" class="search-dialog" aria-labelledby="search-title">
+    <form method="dialog" class="search-head"><h2 id="search-title">Find a study item</h2><button class="quiet-button" aria-label="Close search" type="submit">Close</button></form>
+    <label class="sr-only" for="search-input">Search courses, lessons and books</label>
+    <input id="search-input" type="search" placeholder="Search courses, lessons or books…" autocomplete="off">
+    <div id="search-results" aria-live="polite" class="search-results"></div>
+  </dialog>
+  <p class="sr-only" id="announcer" role="status" aria-live="polite"></p>
+  <noscript>Turn on JavaScript to open the course library, books and planner.</noscript>
+</body>
+</html>

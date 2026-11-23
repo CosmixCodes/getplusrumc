@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.000
+Convert binary to decimal
+
+00:00:04.000 --> 00:00:08.000
+Start at the rightmost digit with weight 1.
+
+00:00:08.000 --> 00:00:12.220
+Double the weight at each position as you move left.
+
+00:00:12.220 --> 00:00:16.220
+Add only the weights where the digit is 1.
+
+00:00:16.220 --> 00:00:21.710
+10110₂ equals 16 + 4 + 2, so the decimal value is 22.

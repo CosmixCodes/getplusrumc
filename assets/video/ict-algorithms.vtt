@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.000
+Trace an algorithm by hand
+
+00:00:04.000 --> 00:00:08.000
+List the inputs and starting values.
+
+00:00:08.000 --> 00:00:12.000
+Make one row for each assignment or loop iteration.
+
+00:00:12.000 --> 00:00:16.000
+Try a boundary input and confirm which branch executes.
+
+00:00:16.000 --> 00:00:25.280
+With a running total starting at 0, processing 2, 4 and 6 yields totals of 2, 6 and 12 in successive rows.
